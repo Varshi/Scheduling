@@ -1,0 +1,90 @@
+#include<iostream.h>
+#include<conio.h>
+class process
+{
+ public:
+ int pid;
+ float bt,rem,at,tat;
+};
+void main()
+{
+ clrscr();
+ int i,j,n,k,time;
+ float sum=0,avg,atat=0;
+ cout<<"Enter the number of processes to be entered:";
+ cin>>n;
+ process p[10],nw[10];
+ cout<<"Enter the process id:"<<endl;
+ for(i=0;i<n;i++)
+ {
+  cin>>p[i].pid;
+ }
+ cout<<"Enter the burst time for each process:";
+ for(i=0;i<n;i++)
+ {
+  cin>>p[i].bt;
+ }
+ cout<<"Enter the arrival time for each process:";
+ for(i=0;i<n;i++)
+ {
+  cin>>p[i].at;
+ }
+
+ for(i=0;i<n;i++)
+ {
+  sum+=p[i].bt;
+ }
+ for(i=0;i<n;i++)
+ {
+  p[i].rem=p[i].bt;
+ }
+ for(time=0;time<=sum;time++)
+ {
+  j=0;
+  for(i=0;i<n;i++)
+  {
+  if((time>=p[i].at)&&(p[i].rem>0))
+	{
+	 nw[j]=p[i];
+	 j++;
+	// cout<<nw[j].pid<<endl;
+	}
+  }
+     //getch();
+
+  for(i=0;i<j;i++)
+  {
+	for(k=i+1;k<j;k++)
+	{
+	 if(nw[i].rem>nw[k].rem)
+	 {
+	  process temp;
+	  temp=nw[i];
+	  nw[i]=nw[k];
+	  nw[k]=temp;
+	 }
+	// cout<<nw[i].pid;
+	}
+
+  }
+  for(i=0;i<n;i++)
+  {
+	if(nw[0].pid==p[i].pid)
+	{
+	 j=i;
+	}
+  }
+  p[j].rem=p[j].rem-1;
+  if(p[j].rem==0)
+  {
+	p[j].tat=time-p[j].at+1;
+	cout<<endl<<"Tat for process"<<p[j].pid<<" is :"<<p[j].tat;
+  }
+
+
+}
+for(i=0;i<n;i++)
+  atat=atat+p[i].tat;
+atat=atat/4;
+cout<<"\naverage tat="<<atat; getch();
+}
