@@ -10,21 +10,29 @@ void main()
 {
  clrscr();
  int i,j,n,k,time;
- float sum=0,avg,atat=0;
+ float sum=0;
+float avg;
+float atat=0;
+
  cout<<"Enter the number of processes to be entered:";
  cin>>n;
  process p[10],nw[10];
  cout<<"Enter the process id:"<<endl;
+
  for(i=0;i<n;i++)
  {
   cin>>p[i].pid;
  }
+
  cout<<"Enter the burst time for each process:";
+
  for(i=0;i<n;i++)
  {
   cin>>p[i].bt;
  }
+
  cout<<"Enter the arrival time for each process:";
+
  for(i=0;i<n;i++)
  {
   cin>>p[i].at;
@@ -34,10 +42,12 @@ void main()
  {
   sum+=p[i].bt;
  }
+
  for(i=0;i<n;i++)
  {
   p[i].rem=p[i].bt;
  }
+
  for(time=0;time<=sum;time++)
  {
   j=0;
@@ -67,6 +77,7 @@ void main()
 	}
 
   }
+
   for(i=0;i<n;i++)
   {
 	if(nw[0].pid==p[i].pid)
@@ -74,6 +85,7 @@ void main()
 	 j=i;
 	}
   }
+
   p[j].rem=p[j].rem-1;
   if(p[j].rem==0)
   {
@@ -83,8 +95,12 @@ void main()
 
 
 }
+
 for(i=0;i<n;i++)
   atat=atat+p[i].tat;
-atat=atat/4;
-cout<<"\naverage tat="<<atat; getch();
+atat=atat/n;
+cout<<"\naverage tat=";
+cout<<atat; 
+getch();
+
 }
