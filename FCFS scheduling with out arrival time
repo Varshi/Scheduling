@@ -1,0 +1,43 @@
+#include<iostream.h>
+#include<conio.h>
+class process
+{
+  public:
+	float ta_time;
+	float burst_time;
+};
+
+void main()
+{
+	clrscr();
+	int n,i;
+	float avg_ta_time=0;
+	process p[4];
+	cout<<"Enter the number of processes: ";
+	cin>>n;
+	cout<<"Enter the burst time for the "<<n<<" processes\n\n";
+	for(i=0;i<n;i++)
+	{
+		cout<<"\nBurst time for process P["<<i+1<<"]: ";
+		cin>>p[i].burst_time;
+	}
+	p[0].ta_time=p[0].burst_time;
+
+	for(i=1;i<n;i++)
+		p[i].ta_time=p[i-1].ta_time+p[i].burst_time;
+
+	for(i=0;i<n;i++)
+		avg_ta_time+=p[i].ta_time;
+
+	avg_ta_time/=n;
+	cout<<"\n\nAverage Turn around time: "<<avg_ta_time;
+	cout<<"\n\n\nProcess	|	Burst Time	|	Turn Around Time\n";
+	for(i=0;i<69;i++)
+		cout<<"-";
+	for(i=0;i<n;i++)
+		cout<<"\n    "<<i+1<<"	|	"<<p[i].burst_time<<"		|	"<<p[i].ta_time<<"\n";
+
+	for(i=0;i<69;i++)
+		cout<<"-";
+	getch();
+}
